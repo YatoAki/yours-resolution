@@ -14,7 +14,6 @@ root.render(
             <a href="home">Home</a>
             <a href="create">Create</a>
             <a href="view">View</a>
-            <a href="login">Login</a>
           </div>
       </header>
       <RouteSwitch />
