@@ -8,7 +8,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <header className='flex justify-between px-20 py-10 items-center'>
+      <header className='flex justify-between py-10 items-center'>
           <h1 className='text-4xl font-Montserrat font-bold'>Yours Resolution</h1>
           <div className='flex gap-8'>
             <a href="home">Home</a>
