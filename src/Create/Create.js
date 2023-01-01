@@ -32,6 +32,7 @@ const Create = () => {
         console.log(token)
         try{
             await addDoc(collection(db,token), {
+                code: token,
                 thisYear: lastYear,
                 lastYear: currentYear,
                 created: Timestamp.now()
