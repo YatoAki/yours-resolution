@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+@layer components {
+    .inputField{
+        @apply flex flex-col gap-4;
+    }
+
+    .inputField input{
+        @apply text-xs focus:outline-none bg-slate-800 py-2 px-5 rounded-md md:w-3/4 h-8;
+    }
+  }
