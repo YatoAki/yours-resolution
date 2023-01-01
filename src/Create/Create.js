@@ -3,7 +3,7 @@ import React from "react";
 const Create = () => {
 
     return(
-        <div>
+        <div className="flex-grow flex justify-between">
             This si Create
         </div>
     )
