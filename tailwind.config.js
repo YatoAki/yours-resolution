@@ -5,7 +5,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        PatrickHand: ['"Patrick Hand"', ...defaultTheme.fontFamily.sans]
+        Montserrat: ['"Montserrat"', ...defaultTheme.fontFamily.sans],
+        Comfortaa: ['"Comfortaa"', ...defaultTheme.fontFamily.sans],
       }
     },
   },
