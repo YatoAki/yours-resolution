@@ -14,7 +14,8 @@ import {
 const View = () => {
 
     const [message,setMessage] = useState([])
-    const [codeEntered,setCodeEntered] = useState(false)
+    const [codeEntered,setCodeEntered] = useState(false);
+    const [loading,setLoading] = useState(false);
 
     const codePressed = () => {
         const resolutonToken = document.getElementById("code").value;
@@ -26,7 +27,15 @@ const View = () => {
                 data: doc.data(),
             })))
         })
-        setCodeEntered(true)
+        setLoading(true);
+        setTimeout(()=>{ 
+            setCodeEntered(true)
+            setLoading(false);
+        
+        },5000)
+        
+        console.log(message)
+        
     }
 
     useEffect(() => {
@@ -41,12 +50,24 @@ const View = () => {
                 <h3 className="bg-white text-sky-900 w-fit py-2 px-5 rounded-full text-sm font-bold">1 January 2023, 12:00 AM</h3>
             </div>
 
-            {
-                (
-                    () => {
-                        if (codeEntered === false){
-                            return(
-                                <div className="flex flex-col justify-center items-center gap-5 px-20">   
+                            {
+                                (
+                                    () => {
+                                        if (codeEntered===false){
+                                            return(
+                                                <div className="flex flex-col justify-center items-center gap-5 px-20">   
+                                                {
+                                (
+                                    ()=>{
+                                        console.log("loading")
+                                        if(loading){
+                                            return(
+                                                <h1 className="text-center text-green-200">Please wait, Loading...</h1>
+                                            )
+                                        }
+                                    }
+                                )()
+                            }
                                     <h1 className="font-bold text-4xl">Enter the code</h1>
                                     <input id="code" type="text" className="text-xs focus:outline-none bg-slate-800 py-2 px-5 rounded-md w-1/2 h-8 text-center" placeholder="Enter 5-character code"/>
                                     <button onClick={codePressed} className="text-xs bg-white text-sky-900 font-bold hover:scale-110 transition-transform px-3 py-2 rounded-md cursor-pointer">Find Out</button>
@@ -55,65 +76,58 @@ const View = () => {
                             )
                             
                         }else{
-                            console.log(codeEntered)
-                            return(
-                                <div className="bg-white text-slate-800 w-2/5 my-10 p-10 pb-7 text-sm font-semibold">
-                            <h1>This is my resolution written at <span className="italic font-bold">1 January 2023, 12:00 AM</span></h1>
-                            <h2 className="text-xl mt-5 mb-2 font-bold">Here is the record of my last year journey</h2>
-                            <div>
-                                <h3 className="tracking-wide text-sm leading-9">Happiest moment</h3>
-                                <p id="happiest" className="text-xs">This and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and that</p>
+                            try{
+                                return(
+                                    <div className="bg-white text-slate-800 w-2/5 my-10 p-10 pb-7 text-sm font-semibold">
+                                <h1>This is my resolution written at <span className="italic font-bold">1 January 2023, 12:00 AM</span></h1>
+                                <h2 className="text-xl mt-5 mb-2 font-bold">Here is the record of my last year journey</h2>
+                                <div>
+                                    <h3 className="tracking-wide text-sm leading-9">Happiest moment</h3>
+                                    <p id="happiest" className="text-xs">{message[0].data.lastYear[0]}</p>
+                                </div>
+    
+                                <div>
+                                    <h3 className="tracking-wide text-sm leading-9">Saddest moment</h3>
+                                    <p id="Saddest" className="text-xs">{message[0].data.lastYear[1]}</p>
+                                </div>
+    
+                                <div>
+                                    <h3 className="tracking-wide text-sm leading-9">Biggest Regret</h3>
+                                    <p id="Regret" className="text-xs">{message[0].data.lastYear[2]}</p>
+                                </div>
+                                <div>
+                                    <h3 className="tracking-wide text-sm leading-9">Biggest Achievement</h3>
+                                    <p id="Achievement" className="text-xs">{message[0].data.lastYear[3]}</p>
+                                </div>
+    
+                                <h2 className="text-xl mt-5 mb-2 font-bold">Here is my goal for upcoming journey</h2>
+                                <div>
+                                    <h3 className="tracking-wide text-sm leading-9">Life Goal</h3>
+                                    <p id="Life" className="text-xs">{message[0].data.thisYear[0]}</p>
+                                </div>
+    
+                                <div>
+                                    <h3 className="tracking-wide text-sm leading-9">Career Goal</h3>
+                                    <p id="Career" className="text-xs">{message[0].data.thisYear[1]}</p>
+                                </div>
+    
+                                <div>
+                                    <h3 className="tracking-wide text-sm leading-9">Education Goal</h3>
+                                    <p id="Education" className="text-xs">{message[0].data.thisYear[2]}</p>
+                                </div>
+    
+                                <div>
+                                    <h3 className="tracking-wide text-sm leading-9">Relationship Goal</h3>
+                                    <p id="Relationship" className="text-xs">{message[0].data.thisYear[3]}</p>
+                                </div>
+    
+                                <h3 className="text-xs mt-5">Code {message[0].data.code}</h3>
                             </div>
-
-                            <div>
-                                <h3 className="tracking-wide text-sm leading-9">Saddest moment</h3>
-                                <p id="Saddest" className="text-xs">This and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and that</p>
-                            </div>
-
-                            <div>
-                                <h3 className="tracking-wide text-sm leading-9">Biggest Regret</h3>
-                                <p id="Regret" className="text-xs">This and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and that</p>
-                            </div>
-
-                            <div>
-                                <h3 className="tracking-wide text-sm leading-9">Happiest moment</h3>
-                                <p id="happiest" className="text-xs">This and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and that</p>
-                            </div>
-
-                            <div>
-                                <h3 className="tracking-wide text-sm leading-9">Biggest Achievement</h3>
-                                <p id="Achievement" className="text-xs">This and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and that</p>
-                            </div>
-
-                            <h2 className="text-xl mt-5 mb-2 font-bold">Here is my goal for upcoming journey</h2>
-                            <div>
-                                <h3 className="tracking-wide text-sm leading-9">Life Goal</h3>
-                                <p id="Life" className="text-xs">This and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and that</p>
-                            </div>
-
-                            <div>
-                                <h3 className="tracking-wide text-sm leading-9">Saddest moment</h3>
-                                <p id="Saddest" className="text-xs">This and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and that</p>
-                            </div>
-
-                            <div>
-                                <h3 className="tracking-wide text-sm leading-9">Career Goal</h3>
-                                <p id="Career" className="text-xs">This and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and that</p>
-                            </div>
-
-                            <div>
-                                <h3 className="tracking-wide text-sm leading-9">Education Goal</h3>
-                                <p id="Education" className="text-xs">This and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and that</p>
-                            </div>
-
-                            <div>
-                                <h3 className="tracking-wide text-sm leading-9">Relationship Goal</h3>
-                                <p id="Relationship" className="text-xs">This and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and thatThis and that</p>
-                            </div>
-
-                            <h3 className="text-xs mt-5">Code #4897489</h3>
-                        </div>
-                            )
+                                )
+                            }catch{
+                                alert("Invalid ID, Please refresh the page to start again")
+                            }
+                            
                             
                         }
                     }
