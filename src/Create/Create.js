@@ -1,4 +1,5 @@
 import React,{useRef,useState,useEffect} from "react";
+import randomstring from 'randomstring';
 import db from '../firebase.js';
 import {
     collection,
@@ -12,7 +13,7 @@ import {
   } from 'firebase/firestore';
 
 const Create = () => {
-    const [data,setData] = useState([]);
+    const [resolutonToken,setResolutionToken] = useState();
 
     const handleSaveData = async (e) => {
         e.preventDefault()
@@ -26,8 +27,11 @@ const Create = () => {
         const education = document.getElementById("Education").value;
         const relationship = document.getElementById("Relationship").value;
         const currentYear = [life,career,education,relationship];
+        const token = "#" + randomstring.generate(5);
+        setResolutionToken(token)
+        console.log(token)
         try{
-            await addDoc(collection(db,"hi"), {
+            await addDoc(collection(db,token), {
                 thisYear: lastYear,
                 lastYear: currentYear,
                 created: Timestamp.now()
@@ -41,6 +45,7 @@ const Create = () => {
     return(
         <div className="flex-grow flex flex-col py-5 gap-8 pb-10">
             <h3 className="bg-white text-sky-900 w-fit py-2 px-5 rounded-full text-sm font-bold">1 January 2023, 12:00 AM</h3>
+            
             <div className="space-y-4 my-5">
                 <h1 className="text-xl tracking-widest font-bold mb-5">So how was last year?</h1>
                 <div className="inputField">
@@ -88,7 +93,21 @@ const Create = () => {
             </div>
 
             <button className="text-xs bg-white text-sky-900 font-bold hover:tracking-widest transition-all px-3 py-2 rounded-md cursor-pointer w-fit" onClick={handleSaveData}>I will achieve it!</button>
-            <p className="tracking-widest font-bolder text-xs">Good things always come to those who seek</p>
+            {
+                (
+                    () => {
+                        if (resolutonToken){
+                            return(
+                                <h4 className="text-green-300 tracking-widest">Your resolution has been submitted successfully. <br/> <span className="leading-6 font-bold text-white  text-sm">Code: {resolutonToken}</span></h4>
+                            )
+                        }else{
+                            return(
+                                <p className="tracking-widest font-bolder text-xs">Good things always come to those who seek</p>
+                            )
+                        }
+                    }
+                )()
+            }
         </div>
     )
 }
