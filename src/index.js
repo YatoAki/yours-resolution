@@ -7,7 +7,7 @@ import "./index.css"
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter  basename='/yours-resolution/'>
       <header className='flex justify-between py-10 items-center'>
           <h1 className='text-4xl font-Montserrat font-bold'>Yours Resolution</h1>
           <div className='flex gap-8'>
