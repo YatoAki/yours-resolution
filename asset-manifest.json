@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/yours-resolution/static/css/main.ef03bd7f.css",
+    "main.js": "/yours-resolution/static/js/main.cd1ed584.js",
+    "index.html": "/yours-resolution/index.html",
+    "main.ef03bd7f.css.map": "/yours-resolution/static/css/main.ef03bd7f.css.map",
+    "main.cd1ed584.js.map": "/yours-resolution/static/js/main.cd1ed584.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ef03bd7f.css",
+    "static/js/main.cd1ed584.js"
+  ]
+}
