@@ -42,12 +42,27 @@ const View = () => {
         setCodeEntered(false);
     },[])
 
+    const getTime = () => {
+        const currentdate = new Date(); 
+        const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
+        let minute = currentdate.getMinutes().toString();
+        console.log(minute)
+        if (minute.length <= 1){
+            minute = "0" + minute;
+        }
+        const datetime = currentdate.getDate() + " "
+                + monthNames[currentdate.getMonth()]  + " " 
+                + currentdate.getFullYear() + ", "  
+                + currentdate.getHours() + ":" + minute;
+        return datetime
+    }
+
     return(
         <div className="flex-grow flex justify-between">
             <div className="flex flex-col justify-center gap-5">
                 <h1 className="font-bold text-7xl">Check out</h1>
                 <h2 className="text-3xl tracking-widest">what people are dreaming</h2>
-                <h3 className="bg-white text-sky-900 w-fit py-2 px-5 rounded-full text-sm font-bold">1 January 2023, 12:00 AM</h3>
+                <h3 className="bg-white text-sky-900 w-fit py-2 px-5 rounded-full text-sm font-bold">{getTime()}</h3>
             </div>
 
                             {
@@ -79,7 +94,7 @@ const View = () => {
                             try{
                                 return(
                                     <div className="bg-white text-slate-800 w-2/5 my-10 p-10 pb-7 text-sm font-semibold">
-                                <h1>This is my resolution written at <span className="italic font-bold">1 January 2023, 12:00 AM</span></h1>
+                                <h1>This is my resolution written at <span className="italic font-bold">{message[0].data.time}</span></h1>
                                 <h2 className="text-xl mt-5 mb-2 font-bold">Here is the record of my last year journey</h2>
                                 <div>
                                     <h3 className="tracking-wide text-sm leading-9">Happiest moment</h3>

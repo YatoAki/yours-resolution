@@ -15,6 +15,21 @@ import {
 const Create = () => {
     const [resolutonToken,setResolutionToken] = useState();
 
+    const getTime = () => {
+        const currentdate = new Date(); 
+        const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
+        let minute = currentdate.getMinutes().toString();
+        console.log(minute)
+        if (minute.length <= 1){
+            minute = "0" + minute;
+        }
+        const datetime = currentdate.getDate() + " "
+                + monthNames[currentdate.getMonth()]  + " " 
+                + currentdate.getFullYear() + ", "  
+                + currentdate.getHours() + ":" + minute;
+        return datetime
+    }
+
     const handleSaveData = async (e) => {
         e.preventDefault()
         const happiest = document.getElementById("Happiest").value;
@@ -35,6 +50,7 @@ const Create = () => {
                 code: token,
                 thisYear: currentYear,
                 lastYear: lastYear,
+                time: getTime(),
                 created: Timestamp.now()
             })
         }catch{
@@ -45,7 +61,7 @@ const Create = () => {
 
     return(
         <div className="flex-grow flex flex-col py-5 gap-8 pb-10">
-            <h3 className="bg-white text-sky-900 w-fit py-2 px-5 rounded-full text-sm font-bold">1 January 2023, 12:00 AM</h3>
+            <h3 className="bg-white text-sky-900 w-fit py-2 px-5 rounded-full text-sm font-bold">{getTime()}</h3>
             
             <div className="space-y-4 my-5">
                 <h1 className="text-xl tracking-widest font-bold mb-5">So how was last year?</h1>
