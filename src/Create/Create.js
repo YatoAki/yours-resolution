@@ -1,6 +1,42 @@
-import React from "react";
+import React,{useRef,useState,useEffect} from "react";
+import db from '../firebase.js';
+import {
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    orderBy,
+    onSnapshot, 
+    Timestamp,
+    deleteDoc
+  } from 'firebase/firestore';
 
 const Create = () => {
+    const [data,setData] = useState([]);
+
+    const handleSaveData = async (e) => {
+        e.preventDefault()
+        const happiest = document.getElementById("Happiest").value;
+        const saddest = document.getElementById("Saddest").value;
+        const regret = document.getElementById("Regret").value;
+        const achievement = document.getElementById("Achievement").value;
+        const lastYear = [happiest,saddest,regret,achievement];
+        const life = document.getElementById("Life").value;
+        const career = document.getElementById("Career").value;
+        const education = document.getElementById("Education").value;
+        const relationship = document.getElementById("Relationship").value;
+        const currentYear = [life,career,education,relationship];
+        try{
+            await addDoc(collection(db,"hi"), {
+                thisYear: lastYear,
+                lastYear: currentYear,
+                created: Timestamp.now()
+            })
+        }catch{
+            alert("Unexpected Error")
+        }
+    }
+
 
     return(
         <div className="flex-grow flex flex-col py-5 gap-8 pb-10">
@@ -51,7 +87,7 @@ const Create = () => {
                 </div>
             </div>
 
-            <button className="text-xs bg-white text-sky-900 font-bold hover:tracking-widest transition-all px-3 py-2 rounded-md cursor-pointer w-fit">I will achieve it!</button>
+            <button className="text-xs bg-white text-sky-900 font-bold hover:tracking-widest transition-all px-3 py-2 rounded-md cursor-pointer w-fit" onClick={handleSaveData}>I will achieve it!</button>
             <p className="tracking-widest font-bolder text-xs">Good things always come to those who seek</p>
         </div>
     )
